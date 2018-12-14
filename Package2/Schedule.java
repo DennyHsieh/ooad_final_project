@@ -1,21 +1,17 @@
+package Package2;
 
 import java.util.*;
 
 /**
  * 
  */
-public class PriceTable {
+public class Schedule {
 
     /**
      * Default constructor
      */
-    public PriceTable() {
+    public Schedule() {
     }
-
-    /**
-     * 
-     */
-    public void ticketfee;
 
     /**
      * 
@@ -30,14 +26,23 @@ public class PriceTable {
     /**
      * 
      */
-    public void numticket;
+    public void date;
 
+    /**
+     * 
+     */
+    public void seat;
+
+    /**
+     * 
+     */
+    public void time;
 
 
     /**
      * 
      */
-    public void getpricetable() {
+    public void getschedule() {
         // TODO implement here
     }
 

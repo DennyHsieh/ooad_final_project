@@ -1,33 +1,41 @@
+package Package2;
 
 import java.util.*;
 
 /**
  * 
  */
-public class Reservationlist {
+public class CreateReserv {
 
     /**
      * Default constructor
      */
-    public Reservationlist() {
+    public CreateReserv() {
     }
 
     /**
      * 
      */
-    public void reservation;
+    public void userID;
 
     /**
      * 
      */
-    public void searchlist() {
+    public void serialnumber;
+
+
+
+    /**
+     * 
+     */
+    public void addlist() {
         // TODO implement here
     }
 
     /**
      * 
      */
-    public void removereserv() {
+    public void checkvacancy() {
         // TODO implement here
     }
 

@@ -1,22 +1,23 @@
+package Package1;
 
 import java.util.*;
 
 /**
  * 
  */
-public class Searchreservation {
+public class deletereservation {
 
     /**
      * Default constructor
      */
-    public Searchreservation() {
+    public deletereservation() {
     }
 
 
     /**
      * 
      */
-    public void checkResrvation() {
+    public void deletereservation() {
         // TODO implement here
     }
 

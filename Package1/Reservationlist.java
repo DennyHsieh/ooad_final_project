@@ -1,39 +1,34 @@
+package Package1;
 
 import java.util.*;
 
 /**
  * 
  */
-public class CheckPrice {
+public class Reservationlist {
 
     /**
      * Default constructor
      */
-    public CheckPrice() {
+    public Reservationlist() {
     }
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * 
      */
-    public void checkprice() {
+    public void reservation;
+
+    /**
+     * 
+     */
+    public void searchlist() {
         // TODO implement here
     }
 
     /**
      * 
      */
-    public void checkpricetable() {
+    public void removereserv() {
         // TODO implement here
     }
 
