@@ -46,6 +46,7 @@ public class GUI {
 				try {
 					GUI window = new GUI();
 					window.frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -98,7 +99,7 @@ public class GUI {
 			}
 		});
 		btnBookingButton.setForeground(SystemColor.controlHighlight);
-		btnBookingButton.setIcon(new ImageIcon("C:\\Users\\admin\\Desktop\\DRAFT2\\src\\gui\\bleu.png"));
+		btnBookingButton.setIcon(new ImageIcon("src\\gui\\bleu.png"));
 		btnBookingButton.setBounds(107, 160, 193, 50);
 		panelMain.add(btnBookingButton);
 		
@@ -109,7 +110,7 @@ public class GUI {
 				panelMain.setVisible(false);
 			}
 		});
-		btnRefundButton.setIcon(new ImageIcon("C:\\Users\\admin\\Desktop\\DRAFT2\\src\\gui\\orange.png"));
+		btnRefundButton.setIcon(new ImageIcon("src\\gui\\orange.png"));
 		btnRefundButton.setBounds(355, 160, 178, 50);
 		panelMain.add(btnRefundButton);
 		
@@ -120,7 +121,7 @@ public class GUI {
 				panelMain.setVisible(false);
 			}
 		});
-		btnCheckButton.setIcon(new ImageIcon("C:\\Users\\admin\\Desktop\\DRAFT2\\src\\gui\\vert.png"));
+		btnCheckButton.setIcon(new ImageIcon("src\\gui\\vert.png"));
 		btnCheckButton.setBounds(596, 160, 178, 50);
 		panelMain.add(btnCheckButton);
 		
