@@ -1,23 +1,15 @@
 package team.t4.booking.client;
 
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 import team.t4.booking.db.TableCrawler;
-import team.t4.booking.db.dbManager.Station;
-import team.t4.booking.ref.Delete_RefundRequestFactory;
-import team.t4.booking.ref.Modify_RefundRequestFactory;
-import team.t4.booking.ref.RefundRequest;
-import team.t4.booking.ref.RefundRequestFactory;
-import team.t4.booking.tk.*;
-import team.t4.booking.userck.CheckRequest;
-import team.t4.booking.userck.CheckRequestFactory;
-import team.t4.booking.userck.Concession_TimeTable_CheckRequest;
-import team.t4.booking.userck.Concession_TimeTable_CheckRequestFactory;
-import team.t4.booking.userck.Normal_User_CheckRequestFactory;
-import team.t4.booking.userck.ResNo_User_CheckRequestFactory;
-import team.t4.booking.userck.TimeTable_CheckRequest;
-import team.t4.booking.userck.TimeTable_CheckRequestFactory;
+import team.t4.booking.ref.AddModify;
+import team.t4.booking.ref.CreateModify;
+import team.t4.booking.tk.AddReservation;
+import team.t4.booking.tk.CreateReservation;
+import team.t4.booking.userck.AddCheck;
+import team.t4.booking.userck.CreateCheck;
+
 /**
  * Provide interface for user to utilize services of the system.
  * @author LiangChiaLun
@@ -39,17 +31,17 @@ public class Client {
 	 * Dissipate request factory reference for client
 	 * initially.
 	 */
-	private static AddNewReservation addNewRes;
-	private static RefundRequestFactory RRF;
-	private static CheckRequestFactory  CRF;
+	private static AddReservation addNewRes;
+	private static AddModify addNewMod;
+	private static AddCheck  addNewChe;
 	
 	/**
 	 * Dissipate request object reference for client
 	 * initially.
 	 */
 	private static CreateReservation creRes;
-	private static RefundRequest RR;
-	private static CheckRequest  CR;
+	private static CreateModify creMod;
+	private static CreateCheck  creChe;
 	
 	
 	/**
@@ -367,20 +359,16 @@ public class Client {
 		numOfChallenged = scanIntRange(0, 10,"請輸入愛心票票數");
 		if(numOfChallenged == 88) menu();
 		
-		addNewRes = new AddNewReservation(UID,date,time,depart,destination, 
+		addNewRes = new AddReservation(UID,date,time,depart,destination, 
 				dateR,timeR,condition, 0,numOfNormal,numOfChildren,numOfSenior,numOfChallenged);
 		try {
 			creRes = addNewRes.getInstance();
 			creRes.checkVacancy();
 			Thread.sleep(500);
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			normalConditionReturnTicket(); 
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
 		}
 	};
 	
@@ -427,21 +415,17 @@ public class Client {
 		numOfChallenged = scanIntRange(0, 10,"請輸入愛心票票數");
 		if(numOfChallenged == 88) menu();
 		
-		addNewRes = new AddNewReservation(UID,date,time,depart,destination, 
+		addNewRes = new AddReservation(UID,date,time,depart,destination, 
 				dateR,timeR,"", 0,numOfNormal,numOfChildren,numOfSenior,numOfChallenged); 
 		try {
 			creRes = addNewRes.getInstance();
 			creRes.checkVacancy();
 			Thread.sleep(500);
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			normalConditionReturnTicket(); 
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
-		}		
+		}
 	}
 	
 	/**
@@ -485,22 +469,17 @@ public class Client {
 		numOfChallenged = scanIntRange(0, 10,"請輸入愛心票票數");
 		if(numOfChallenged == 88) menu();
 		
-		addNewRes = new AddNewReservation(UID,date,time,depart,destination, 
+		addNewRes = new AddReservation(UID,date,time,depart,destination, 
 				"","",condition, 0,numOfNormal,numOfChildren,numOfSenior,numOfChallenged); 
 		try {
 			creRes = addNewRes.getInstance();
 			creRes.checkVacancy();
 			Thread.sleep(500);
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			normalConditionReturnTicket(); 
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
-		}	
-		
+		} 
 	}
 	
 	/**
@@ -541,21 +520,17 @@ public class Client {
 	numOfChallenged = scanIntRange(0, 10,"請輸入愛心票票數");
 	if(numOfChallenged == 88) menu();
 	
-	addNewRes = new AddNewReservation(UID,date,time,depart,destination, 
+	addNewRes = new AddReservation(UID,date,time,depart,destination, 
 			"","","", 0,numOfNormal,numOfChildren,numOfSenior,numOfChallenged); 
 	try {
 		creRes = addNewRes.getInstance();
 		creRes.checkVacancy();
 		Thread.sleep(500);
 		menu();
-	} catch (FillException e) {
+	} catch (Exception e) {
 		printout(e.getMessage()+"\n\n");
 		normalConditionReturnTicket(); 
-	} catch (Exception e) {
-		printout(e.getMessage());
-		printout("系統發生錯誤");
-		menu();
-	}	
+	} 
 		
 	};
 	
@@ -645,21 +620,17 @@ public class Client {
 		if(numOfChallenged == 88) menu();
 		
 		
-		addNewRes = new AddNewReservation(UID,date,time,depart,destination, 
+		addNewRes = new AddReservation(UID,date,time,depart,destination, 
 				dateR,timeR,condition, numOfCollege,numOfNormal,numOfChildren,numOfSenior,numOfChallenged); 
 		try {
 			creRes = addNewRes.getInstance();
 			creRes.checkVacancy();
 			Thread.sleep(500);
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			normalConditionReturnTicket(); 
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
-		}
+		} 
 	};
 	
 	/**
@@ -711,21 +682,17 @@ public class Client {
 		numOfChallenged = scanIntRange(0, 10,"請輸入愛心票票數");
 		if(numOfChallenged == 88) menu();
 		
-		addNewRes = new AddNewReservation(UID,date,time,depart,destination, 
+		addNewRes = new AddReservation(UID,date,time,depart,destination, 
 				dateR,timeR,"", numOfCollege,numOfNormal,numOfChildren,numOfSenior,numOfChallenged); 
 		try {
 			creRes = addNewRes.getInstance();
 			creRes.checkVacancy();
 			Thread.sleep(500);
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			normalConditionReturnTicket(); 
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
-		}		
+		}	
 	}
 	/**
 	 * Provide a interface for users to fill in the data
@@ -774,22 +741,17 @@ public class Client {
 		numOfChallenged = scanIntRange(0, 10,"請輸入愛心票票數");
 		if(numOfChallenged == 88) menu();
 		
-		addNewRes = new AddNewReservation(UID,date,time,depart,destination, 
+		addNewRes = new AddReservation(UID,date,time,depart,destination, 
 				"","",condition, numOfCollege,numOfNormal,numOfChildren,numOfSenior,numOfChallenged); 
 		try {
 			creRes = addNewRes.getInstance();
 			creRes.checkVacancy();
 			Thread.sleep(500);
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			normalConditionReturnTicket(); 
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
-		}	
-		
+		} 
 	}
 	/**
 	 * Provide a interface for users to fill in the data
@@ -835,22 +797,17 @@ public class Client {
 			numOfChallenged = scanIntRange(0, 10,"請輸入愛心票票數");
 			if(numOfChallenged == 88) menu();
 			
-			addNewRes = new AddNewReservation(UID,date,time,depart,destination, 
+			addNewRes = new AddReservation(UID,date,time,depart,destination, 
 					"","","",numOfCollege,numOfNormal,numOfChildren,numOfSenior,numOfChallenged); 
 			try {
 				creRes = addNewRes.getInstance();
 				creRes.checkVacancy();
 				Thread.sleep(500);
 				menu();
-			} catch (FillException e) {
+			} catch (Exception e) {
 				printout(e.getMessage()+"\n\n");
 				normalConditionReturnTicket(); 
-			} catch (Exception e) {
-				printout(e.getMessage());
-				printout("系統發生錯誤");
-				menu();
-			}	
-				
+			} 			
 	};
 
 	
@@ -899,34 +856,15 @@ public class Client {
 		System.out.println("▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂\n");
 		UID = textInput(new UIDCheck(),"請輸入您的身分證字號\n");
 		reservationNo = textInput(new RNCheck(),"請輸入訂位代號");
-		RRF = new Modify_RefundRequestFactory(UID, reservationNo); 
+		addNewMod = new AddModify(UID, reservationNo); 
 		try {
-			RR = RRF.getInstance();
-			int num = RR.print();
-			if(num == 0) {
-				throw new FillException("");
-			}
-			int select = scanIntRange(1,num,"請選擇要修改的交易紀錄");
-			int[] Num = RR.setType(selectType("請選擇要減少人數的票種"),select);
-			while (Num[0] == 0 ) {
-				printoutln("不可選擇票種為零的項目");
-				Num = RR.setType(selectType("請選擇要減少人數的票種"),select);
-			}
-			while (Num[0] == Num[1] && Num[0] == 1 ) {
-				printoutln("不可選擇刪除後總票數為零的種類，若欲刪除交易資料，請使用刪除功能");
-				Num = RR.setType(selectType("請選擇要減少人數的票種"),select);
-			}
-			RR.setAmount(scanIntRange(1,Num[0], "請輸入要減少的數量"));
-			RR.execute(select);
+			creMod = addNewMod.getInstance();
+			creMod.checkModify();
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			modify();
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
-		}
+		} 
 	};
 	
 	/**
@@ -937,23 +875,17 @@ public class Client {
 		System.out.println("▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂\n");
 		UID = textInput(new UIDCheck(),"請輸入您的身分證字號\n");
 		reservationNo = textInput(new RNCheck(),"請輸入訂位代號");
-		RRF = new Delete_RefundRequestFactory(UID, reservationNo); 
+		addNewMod = new AddModify (UID, reservationNo); 
 		try {
-			RR = RRF.getInstance();
-			int num = RR.print();
-			if(num == 0) {
-				throw new FillException("");
-			}
-			RR.execute(scanIntRange(1,num,"請選擇要刪除的交易紀錄"));
-				menu();
-		} catch (FillException e) {
+			creMod = addNewMod.getInstance();
+			System.out.println("client 881 ");
+			creMod.checkDelete();	
+			printoutln("刪除成功");
+			menu();
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			delete();
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
-		}
+		} 
 		
 	};
 	/**
@@ -1004,22 +936,19 @@ public class Client {
 		destination = selectLocation("請選擇抵達地點");
 		printout("請輸入訂票之車次號碼");
 		String trainNo = new Scanner(System.in).nextLine();
-		CRF = new ResNo_User_CheckRequestFactory(UID, depart,destination, 
-				date,trainNo);
+		addNewChe= new AddCheck(UID, "",destination,depart, 
+				date,trainNo,"","","","","");
 		try {
-			CR = CRF.getInstance();
-			CR.print();
+			creChe = addNewChe.getInstance();
+			printoutln("client line 940");
+			creChe.checkWithoutRn();
 			printoutln("按Enter鍵繼續 ฅ●ω●ฅ");
 			new Scanner(System.in).nextLine();
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			timetable();
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
-		}
+		} 
 	}
 	
 	/**
@@ -1048,20 +977,16 @@ public class Client {
 		System.out.println("▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂\n");
 		UID = textInput(new UIDCheck(),"請輸入您的身分證字號\n");
 		reservationNo = textInput(new RNCheck(),"請輸入訂位代號");
-		CRF = new Normal_User_CheckRequestFactory(UID, reservationNo); 
+		addNewChe = new AddCheck(UID, reservationNo,"","","","","","","","",""); 
 		try {
-			CR = CRF.getInstance();
-			CR.print();
+			creChe = addNewChe.getInstance();
+			creChe.checkWithRn();
 			printoutln("按Enter鍵繼續 ฅ●ω●ฅ");
 			new Scanner(System.in).nextLine();
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			transaction();
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
 		}
 	}
 	
@@ -1075,22 +1000,17 @@ public class Client {
 		time = textInput(new TimeCheck(),"請輸入條件時間 (Ex:05:20)\n");
 		depart = selectLocation("請選擇出發地點");
 		destination = selectLocation("請選擇抵達地點");
-		CRF = new Concession_TimeTable_CheckRequestFactory(date,time,condition,depart,destination);
+		addNewChe = new AddCheck("","","","","","",date,time,condition,depart,destination);
 		try {
-			CR = CRF.getInstance();
-			CR.print();
+			creChe = addNewChe.getInstance();
+			creChe.checkConcessionTable();
 			printoutln("按Enter鍵繼續 ฅ●ω●ฅ");
 			new Scanner(System.in).nextLine();
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			timetable();
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
 		}	
-		
 	}
 	
 	/**
@@ -1099,21 +1019,17 @@ public class Client {
 	public static void timetable() {
 		System.out.println("▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂\n");
 		date = textInput(new DateCheck(),"請輸入欲查詢之日期(◕ܫ◕)\n");
-		CRF = new TimeTable_CheckRequestFactory(date);
+		addNewChe = new AddCheck("","","","","","",date,"","","","");
 		try {
-			CR = CRF.getInstance();
-			CR.print();
+			creChe = addNewChe.getInstance();
+			creChe.checkNormalTable();
 			printoutln("按Enter鍵繼續 ฅ●ω●ฅ");
 			new Scanner(System.in).nextLine();
 			menu();
-		} catch (FillException e) {
+		} catch (Exception e) {
 			printout(e.getMessage()+"\n\n");
 			timetable();
-		} catch (Exception e) {
-			printout(e.getMessage());
-			printout("系統發生錯誤");
-			menu();
-		}	
+		} 
 	}
 	
 }
