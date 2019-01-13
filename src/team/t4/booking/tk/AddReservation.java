@@ -47,6 +47,7 @@ public class AddReservation {
 	
 	public CreateReservation getInstance() throws Exception{
 		
+		/*
 		if (depart.equals(destination)) {
 			throw new Exception("出發地與目的地不可相同");
 		}
@@ -73,6 +74,9 @@ public class AddReservation {
 		if (dateCheck(date) == false) {
 			throw new Exception("訂票失敗 " + this.date.substring(0,4)+"/"+this.date.substring(4,6)+"/"+this.date.substring(6,8) + "未能預約" );
 		}
+		*/
+		System.out.println(UID+date+time+depart+destination+dateR+timeR+condition+
+				numOfCollege+ numOfNormal+numOfChildren+numOfSenior+numOfChallenged);
 		return new CreateReservation(UID,date,time,depart,destination,dateR,timeR,condition,
 						numOfCollege, numOfNormal,numOfChildren,numOfSenior,numOfChallenged);
 	};
