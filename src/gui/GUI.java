@@ -79,6 +79,9 @@ public class GUI {
 	private Integer JRroundtripclicktimes = 0;
 	private JTextField jTextFieldDate2;
 	private AddReservation addNewRes;
+	private JTextField UserID;
+	private JTextField ReservationNumber;
+	private JTextField date;
 			
 	/**
 	 * Launch the application.
@@ -127,6 +130,73 @@ public class GUI {
 		frame.getContentPane().add(panelBooking, "name_2756131448400");
 		panelBooking.setLayout(null);
 		
+		final JPanel panelReturn = new JPanel();
+		frame.getContentPane().add(panelReturn, "name_247753624742900");
+		panelReturn.setLayout(null);
+		JList list = new JList();
+		list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Integer index = list.getSelectedIndex();
+				selected[0] = index;
+				//newResv = new CreateReservation(index);
+				//System.out.print(index);
+				
+			}
+		});
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setBackground(SystemColor.info);
+		list.setFont(new Font("微軟正黑體", Font.PLAIN, 18));
+		list.setSelectedIndex(0);
+		list.setBounds(178, 141, 542, 272);
+		panelReturn.add(list);
+		
+		JLabel lblNewLabel_1 = new JLabel("查詢結果");
+		lblNewLabel_1.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
+		lblNewLabel_1.setBounds(405, 60, 81, 24);
+		panelReturn.add(lblNewLabel_1);
+		
+		JLabel label_2 = new JLabel("車次");
+		label_2.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
+		label_2.setBounds(205, 104, 44, 24);
+		panelReturn.add(label_2);
+		
+		JLabel label_5 = new JLabel("備註");
+		label_5.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
+		label_5.setBounds(264, 104, 44, 24);
+		panelReturn.add(label_5);
+		
+		JLabel label_7 = new JLabel("發車站-終點站");
+		label_7.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
+		label_7.setBounds(382, 104, 134, 24);
+		panelReturn.add(label_7);
+		
+		JLabel label_8 = new JLabel("日期");
+		label_8.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
+		label_8.setBounds(328, 104, 44, 24);
+		panelReturn.add(label_8);
+		
+		JLabel label_9 = new JLabel("開車時間\t");
+		label_9.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
+		label_9.setBounds(526, 104, 81, 24);
+		panelReturn.add(label_9);
+		
+		JLabel label_6 = new JLabel("抵達時間\t");
+		label_6.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
+		label_6.setBounds(615, 104, 81, 24);
+		panelReturn.add(label_6);
+		
+		JButton SubmittReturnButton = new JButton("");
+		SubmittReturnButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+			}
+		});
+		SubmittReturnButton.setIcon(new ImageIcon("C:\\Users\\admin\\Desktop\\DRAFT2\\src\\gui\\confirm.png"));
+		SubmittReturnButton.setBounds(342, 436, 192, 43);
+		panelReturn.add(SubmittReturnButton);
+		
 		final JPanel panelRefund = new JPanel();
 		frame.getContentPane().add(panelRefund, "name_2762253138900");
 		panelRefund.setLayout(null);
@@ -135,9 +205,57 @@ public class GUI {
 		frame.getContentPane().add(panelCheck, "name_2765710027600");
 		panelCheck.setLayout(null);
 		
-		final JPanel panelReturn = new JPanel();
-		frame.getContentPane().add(panelReturn, "name_247753624742900");
-		panelReturn.setLayout(null);
+		JPanel panelBookingHistory = new JPanel();
+		frame.getContentPane().add(panelBookingHistory, "name_307963157522700");
+		panelBookingHistory.setLayout(null);
+		
+		JLabel Label = new JLabel("訂位資料查詢與修改");
+		Label.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
+		Label.setBounds(374, 28, 211, 39);
+		panelBookingHistory.add(Label);
+		
+		JLabel label_10 = new JLabel("請輸入訂位識別碼:");
+		label_10.setFont(new Font("微軟正黑體", Font.PLAIN, 18));
+		label_10.setBounds(99, 175, 170, 25);
+		panelBookingHistory.add(label_10);
+		
+		JLabel label_11 = new JLabel("身份證字號 :");
+		label_11.setFont(new Font("微軟正黑體", Font.PLAIN, 18));
+		label_11.setBounds(99, 248, 128, 25);
+		panelBookingHistory.add(label_11);
+		
+		JLabel label_12 = new JLabel("訂位代號 :");
+		label_12.setFont(new Font("微軟正黑體", Font.PLAIN, 18));
+		label_12.setBounds(99, 308, 97, 25);
+		panelBookingHistory.add(label_12);
+		
+		UserID = new JTextField();
+		UserID.setFont(new Font("微軟正黑體", Font.PLAIN, 18));
+		UserID.setBounds(237, 247, 117, 27);
+		panelBookingHistory.add(UserID);
+		UserID.setColumns(10);
+		
+		ReservationNumber = new JTextField();
+		ReservationNumber.setFont(new Font("微軟正黑體", Font.PLAIN, 18));
+		ReservationNumber.setColumns(10);
+		ReservationNumber.setBounds(237, 307, 117, 27);
+		panelBookingHistory.add(ReservationNumber);
+		
+		JButton confirm = new JButton("");
+		confirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		confirm.setIcon(new ImageIcon("C:\\Users\\admin\\Desktop\\DRAFT2\\src\\gui\\confirm.png"));
+		confirm.setBounds(478, 406, 168, 56);
+		panelBookingHistory.add(confirm);
+		
+		JButton button_1 = new JButton("");
+		button_1.setIcon(new ImageIcon("C:\\Users\\admin\\Desktop\\DRAFT2\\src\\gui\\violet.jpg"));
+		button_1.setFont(new Font("微軟正黑體", Font.PLAIN, 13));
+		button_1.setBounds(683, 406, 168, 56);
+		panelBookingHistory.add(button_1);
 		
 		JButton btnBookingButton = new JButton("");
 		btnBookingButton.addActionListener(new ActionListener() {
@@ -394,23 +512,6 @@ public class GUI {
 		int selected[] = new int [2];
 		selected[0] = -1;
 		selected[1] = -1;
-		JList list = new JList();
-		list.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Integer index = list.getSelectedIndex();
-				selected[0] = index;
-				//newResv = new CreateReservation(index);
-				//System.out.print(index);
-				
-			}
-		});
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setBackground(SystemColor.info);
-		list.setFont(new Font("微軟正黑體", Font.PLAIN, 18));
-		list.setSelectedIndex(0);
-		list.setBounds(178, 141, 542, 272);
-		panelReturn.add(list);
 		panelCheck.setVisible(false);
 		
 		JLabel book_inst_8 = new JLabel("乘客人數");
@@ -647,40 +748,20 @@ public class GUI {
 		label_1.setBounds(99, 129, 130, 25);
 		panelCheck.add(label_1);
 		
-		JLabel lblNewLabel_1 = new JLabel("查詢結果");
-		lblNewLabel_1.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
-		lblNewLabel_1.setBounds(405, 60, 81, 24);
-		panelReturn.add(lblNewLabel_1);
+		JPanel panelCheck_EnterDate = new JPanel();
+		frame.getContentPane().add(panelCheck_EnterDate, "name_310663936739500");
+		panelCheck_EnterDate.setLayout(null);
 		
-		JLabel label_2 = new JLabel("車次");
-		label_2.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
-		label_2.setBounds(205, 104, 44, 24);
-		panelReturn.add(label_2);
+		JLabel EnterDate = new JLabel("請輸入諭查詢時刻表的日期：");
+		EnterDate.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
+		EnterDate.setBounds(99, 129, 253, 26);
+		panelCheck_EnterDate.add(EnterDate);
 		
-		JLabel label_5 = new JLabel("備註");
-		label_5.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
-		label_5.setBounds(264, 104, 44, 24);
-		panelReturn.add(label_5);
-		
-		JLabel label_7 = new JLabel("發車站-終點站");
-		label_7.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
-		label_7.setBounds(382, 104, 134, 24);
-		panelReturn.add(label_7);
-		
-		JLabel label_8 = new JLabel("日期");
-		label_8.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
-		label_8.setBounds(328, 104, 44, 24);
-		panelReturn.add(label_8);
-		
-		JLabel label_9 = new JLabel("開車時間\t");
-		label_9.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
-		label_9.setBounds(526, 104, 81, 24);
-		panelReturn.add(label_9);
-		
-		JLabel label_6 = new JLabel("抵達時間\t");
-		label_6.setFont(new Font("微軟正黑體", Font.PLAIN, 19));
-		label_6.setBounds(615, 104, 81, 24);
-		panelReturn.add(label_6);
+		date = new JTextField();
+		date.setFont(new Font("微軟正黑體", Font.PLAIN, 18));
+		date.setBounds(99, 201, 187, 26);
+		panelCheck_EnterDate.add(date);
+		date.setColumns(10);
 		
 		
 	}
