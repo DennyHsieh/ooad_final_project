@@ -23,13 +23,14 @@ public class CreateModify {
 	}
 	
 	
-	public void checkModify() throws Exception {
+	public String[] checkModify() throws Exception {
+		String[] result = new String[2];
 		try {
 			CheckTransaction checkTransaction = new CheckTransaction();
 			searchResult = checkTransaction.getTransactWithRn(UID, reservationNo);
 			int i = 0;
 			 while(i<2 && searchResult[i][0]!=null) {
-				 System.out.println(searchResult[i][6]+" "+
+				 result[i] = searchResult[i][6]+" "+
 						 searchResult[i][1]+" "+
 						 searchResult[i][7]+" 到 "+searchResult[i][8]+" "+
 						 "出發:"+searchResult[i][3]+" "+"到達:"+searchResult[i][4]+" "+
@@ -39,55 +40,63 @@ public class CreateModify {
 						 "兒童票:"+searchResult[i][14]+"張 "+
 						 "敬老票:"+searchResult[i][15]+"張 "+
 						 "愛心票:"+searchResult[i][16]+"張 "+
-						 "總價:"+searchResult[i][9]);
+						 "總價:"+searchResult[i][9];
 				 i++;
 			 }
 			 if(i== 0) {
 					throw new Exception();
 				}
+			 return result;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		catch (Exception e) {
-			throw new Exception();
-		}	
-		int select = 0;
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("請選擇要修改的交易紀錄");
-		select = (scanner.nextInt()-1);
+		return result;
+	}
+	
+	public void executeModify(int selection, String type, int reduce) {
+		
+		// numOfCollege numOfNormal numOfSenior numOfChallenged numOfChildren
+//		int select = 0;
+//		Scanner scanner = new Scanner(System.in);
+//		System.out.println("請選擇要修改的交易紀錄");
+//		select = (scanner.nextInt()-1);
 		
 		// type number, totalnumber 
-		int[] Num = this.setType(selectType("請選擇要減少人數的票種"),select);
-		System.out.println("createModify 60 int[] Num = "+Num[0]+Num[1]);
-		while (Num[0] == 0 ) {
-			System.out.println("不可選擇票種為零的項目");
-			Num = this.setType(selectType("請選擇要減少人數的票種"),select);
-		}
-		while (Num[0] == Num[1] && Num[0] == 1 ) {
-			System.out.println("不可選擇刪除後總票數為零的種類，若欲刪除交易資料，請使用刪除功能");
-			Num = this.setType(selectType("請選擇要減少人數的票種"),select);
-		}
+//		int[] Num = this.setType(selectType("請選擇要減少人數的票種"),select);
+//		System.out.println("createModify 60 int[] Num = "+Num[0]+Num[1]);
+//		while (Num[0] == 0 ) {
+//			System.out.println("不可選擇票種為零的項目");
+//			Num = this.setType(selectType("請選擇要減少人數的票種"),select);
+//		}
+//		while (Num[0] == Num[1] && Num[0] == 1 ) {
+//			System.out.println("不可選擇刪除後總票數為零的種類，若欲刪除交易資料，請使用刪除功能");
+//			Num = this.setType(selectType("請選擇要減少人數的票種"),select);
+//		}
 		
-		System.out.println("請輸入要減少的數量");
-		int reduce = scanner.nextInt();
-		while (Num[0] - reduce < 0 ) {
-			System.out.println("不可選擇刪除後小於零的數字");
-			System.out.println("請輸入要減少的數量");
-			reduce = scanner.nextInt();
-		}
+//		System.out.println("請輸入要減少的數量");
+//		int reduce = scanner.nextInt();
+//		while (Num[0] - reduce < 0 ) {
+//			System.out.println("不可選擇刪除後小於零的數字");
+//			System.out.println("請輸入要減少的數量");
+//			reduce = scanner.nextInt();
+//		}
 		this.setAmount(reduce);
 		System.out.println("createModify 78");
 		Modify modify = new Modify();
-		modify.modifySelect(select, searchResult, reservationNo, reduce, type);
+		modify.modifySelect(selection, searchResult, reservationNo, reduce, type);
 	}
 	
-	
-	public void checkDelete() throws Exception {
+
+
+	public String[] checkDelete() throws Exception {
+		String[] result = new String[2];
 		try {
 			CheckTransaction checkTransaction = new CheckTransaction();
 			searchResult = checkTransaction.getTransactWithRn(UID, reservationNo);
 			System.out.print("checkmodify 81 ");
 			int i = 0;
 			 while(i<2 && searchResult[i][0]!=null) {
-				 System.out.println(searchResult[i][6]+" "+
+				 result[i]=searchResult[i][6]+" "+
 						 searchResult[i][1]+" "+
 						 searchResult[i][7]+" 到 "+searchResult[i][8]+" "+
 						 "出發:"+searchResult[0][3]+" "+"到達:"+searchResult[i][4]+" "+
@@ -97,20 +106,23 @@ public class CreateModify {
 						 "兒童票:"+searchResult[i][14]+"張 "+
 						 "敬老票:"+searchResult[i][15]+"張 "+
 						 "愛心票:"+searchResult[i][16]+"張 "+
-						 "總價:"+searchResult[i][9]);
+						 "總價:"+searchResult[i][9];
 				 i++;
 			 }
-			 
-				if(i == 0) {
-					throw new Exception("");
-				}
-				Scanner scanner = new Scanner(System.in);
-				Modify modify = new Modify();
-				System.out.println("請選擇要刪除的交易紀錄");
-				modify.DeleteSelect(searchResult, scanner.nextInt(), reservationNo);
-		}
-		catch (Exception e) {
+			 return result;	 
+		} catch (Exception e) {
 			System.out.println(e);
+		}
+		return result;
+	}
+		
+	public void excuteDelete(int selection) {
+		try {
+			Modify modify = new Modify();
+			modify.DeleteSelect(searchResult, selection, reservationNo);
+			searchResult = null;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 

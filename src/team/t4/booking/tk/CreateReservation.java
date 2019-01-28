@@ -68,6 +68,7 @@ public class CreateReservation {
 				 * get the information of the available train.
 				 */
 				CheckEmptySeat checkEmptySeat = new CheckEmptySeat();
+				info = null;
 				info = checkEmptySeat.getTrainAvail(date, time, depart, destination,
 					numOfCollege+numOfNormal+numOfChildren+numOfChallenged, numOfNormal, condition);
 		
@@ -81,16 +82,16 @@ public class CreateReservation {
 						i++;
 					}
 				}
-				info = null;
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
 				info = null;
-				infoR = null;
 			}
 				return trainInfo;
 		} else {	
 			try {
 				CheckEmptySeat seatChecker = new CheckEmptySeat();
+				info = null;
+				infoR = null;
 				info = seatChecker.getTrainAvail(date, time, depart, destination,
 						numOfCollege+numOfNormal+numOfChildren+numOfChallenged, numOfNormal, condition);
 				infoR = seatChecker.getTrainAvail(dateR,timeR,destination,depart,
@@ -111,9 +112,6 @@ public class CreateReservation {
 						i++;
 					}
 				}
-				
-				info = null;
-				infoR = null;
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				info = null;
@@ -132,14 +130,18 @@ public class CreateReservation {
 	 */
 	
 	
-	public String[] saveAndOutput(int[] selection) { //int[2] selection selection[0] =  go selection[1] = back defult = -1
+	public String saveAndOutput(int[] selection) { //int[2] selection selection[0] =  go selection[1] = back defult = -1
 		String[] returnResult = new String[2];
+		String reservationNo="";
 		try {
+			System.out.println("createReservaiton139");
 			CheckEmptySeat checkEmptySeat = new CheckEmptySeat();
 			int go = selection[0];
 			int back = selection[1];
-				
-			String reservationNo = getReservationNo();
+			System.out.println("the go is "+go);
+			System.out.println("createReservation143");
+			System.out.println("print the informatino!!"+info[0][0]+"  "+info[0][1]+"   ");
+			reservationNo = getReservationNo();
 			String[][] seats = checkEmptySeat.getConditionSeatInfo(date, info[go][0], depart, destination, numOfCollege+numOfNormal+numOfChildren+numOfChallenged, condition);
 			// Save the transaction into the database.
 			addList(info[go], seats, "去程", reservationNo);
@@ -178,12 +180,13 @@ public class CreateReservation {
 			}
 			
 			
-		return returnResult; //returnResult[0] go result [1] back result
-			
+		//return returnResult; //returnResult[0] go result [1] back result
+		
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return returnResult;
+		//return returnResult;
+		return reservationNo;
 	}
 
 //					CheckTransaction checkTransaction = new CheckTransaction();

@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import team.t4.booking.tk.Station;
 
 public class AddCheck {
@@ -45,12 +47,14 @@ public class AddCheck {
 	public CreateCheck getInstance() throws Exception {
 		if(!depart.equals("")) {
 			if (depart.equals(destination)) {
+				//JOptionPane.showMessageDialog(null,"出發地與目的地不可相同");
 				throw new Exception("出發地與目的地不可相同");
 			}
 		}
 		if(!checkDate.equals(""))
 			if (dateCheck(checkDate) == false) {
-				throw new Exception("查詢失敗 " + this.checkDate.substring(0,4)+"/"+this.checkDate.substring(4,6)+"/"+this.checkDate.substring(6,8) + "尚未有時刻表供查詢" );
+				//JOptionPane.showMessageDialog(null,"查詢失敗 " + this.checkDate.substring(0,4)+"/"+this.checkDate.substring(4,6)+"/"+this.checkDate.substring(6,8) + "尚未有時刻表供查詢");
+				throw new Exception("查詢失敗 " + this.checkDate.substring(0,4)+"/"+this.checkDate.substring(4,6)+"/"+this.checkDate.substring(6,8) + " 尚未有時刻表供查詢" );
 			}
 		
 		return new CreateCheck( UID, reservationNo, destination,  depart, date,  trainNo,checkDate, checkTime, timeCondition,  checkDepart, checkDestination);
