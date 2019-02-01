@@ -3,19 +3,15 @@
 
 
 ## Booking System for High Speed Rail
-* **Deposit**
-
-  <!-- ![deposit](img/deposit.png) -->
 
 * **Booking**
 
   <!-- ![booking](img/booking.png) -->
 
+* **Modify**
 
-* **TimeTable**
+  <!-- ![modify](img/modify.png) -->
 
-  <!-- ![timetable1](img/timetable.png) -->
+* **Searching**
 
-* **History**
-
-  <!-- ![history](img/history.png) -->
+  <!-- ![searching](img/searching.png) -->
