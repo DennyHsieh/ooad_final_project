@@ -8,9 +8,9 @@
 
   <!-- ![booking](img/booking.png) -->
 
-* **Modify**
+* **Modifying**
 
-  <!-- ![modify](img/modify.png) -->
+  <!-- ![modifying](img/modifying.png) -->
 
 * **Searching**
 
